@@ -1,0 +1,10 @@
+.env*
+.git/
+private/
+verification/
+.agents/
+test/
+scripts/
+docs/
+public/
+README.md

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow,noarchive"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://jhye-job-tracker-api.vercel.app; object-src 'none'; base-uri 'none'; form-action 'none'"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Jhye · Job Tracker</title><link rel="stylesheet" href="./style.css"><script src="./app.min.js" defer></script></head>
+<body>
+<section id="auth-view" class="auth-view">
+  <div class="auth-card">
+    <span class="eyebrow">YOUR PRIVATE WORKSPACE</span><h1 id="auth-title">Welcome back.</h1>
+    <p id="auth-description">Sign in to manage your applications and next steps.</p>
+    <div id="enrolment" hidden><p>Add this account to your authenticator app, then enter its six-digit code.</p><img id="qr" alt="Authenticator setup QR code" width="220" height="220"><label>Manual setup key<input id="totp-key" readonly></label></div>
+    <form id="auth-form">
+      <label>Username<input id="username" autocomplete="username" required minlength="3" maxlength="64"></label>
+      <label>Password<input id="password" type="password" autocomplete="current-password" required maxlength="1024"></label>
+      <label>Authenticator or recovery code<input id="otp" autocomplete="one-time-code" required maxlength="24" placeholder="6-digit code or a recovery code"></label>
+      <p id="auth-error" class="error" role="alert"></p><button id="auth-submit" class="primary">Sign in</button>
+    </form>
+    <div id="recovery-view" hidden><h2>Save your recovery codes</h2><p>Each code works once if you lose access to your authenticator. Keep them in your password manager with your username and password.</p><pre id="recovery-codes"></pre><button id="recovery-download">Download recovery codes</button><button id="recovery-continue" class="primary">I have saved my codes</button></div>
+    <p class="auth-footnote">Your session stays in this tab. Sign in again after reloading or opening another tab.</p>
+  </div>
+</section>
+<div id="workspace" hidden>
+  <aside class="sidebar">
+    <a class="brand" href="./">J<span>O</span><b>Job tracker</b></a>
+    <div class="local-label"><i></i> PRIVATE WORKSPACE</div>
+    <p class="side-caption">YOUR PIPELINE</p><nav id="stage-nav" aria-label="Application stages"></nav>
+    <div class="side-bottom"><p>Saved to your private account.</p><small>Updates sync between devices.<br>Sign in to access your records.</small></div>
+  </aside>
+  <main>
+    <header class="topbar"><div><span class="eyebrow">JHYE O’MELEY</span><h1>Your next chapter.</h1><p>A clear view of every application and what comes next.</p></div><button id="logout">Sign out</button><button id="add" class="primary">＋ Add application</button></header>
+    <div class="status-line"><span id="save-state" role="status">Loading your applications…</span><span class="local-badge">● Signed in</span></div>
+    <section id="stats" class="stats" aria-label="Pipeline overview"></section>
+    <section class="ledger">
+      <div class="ledger-heading"><div><span class="eyebrow">THE OPPORTUNITIES</span><h2 id="view-title">All applications <span id="result-count"></span></h2></div><div class="exports"><button id="export-csv">Export CSV ↗</button><button id="export-json">Back up JSON ↗</button></div></div>
+      <div class="toolbar"><label class="search"><span>⌕</span><input id="search" type="search" aria-label="Search applications" placeholder="Search roles, companies or notes"></label><label class="toggle"><input id="interest" type="checkbox"> Strong interest</label><label class="toggle"><input id="due" type="checkbox"> Follow-up due</label><select id="sort" aria-label="Sort applications"><option value="updated">Latest update</option><option value="date">Application date</option><option value="company">Company A–Z</option></select></div>
+      <div class="table-scroll"><table><thead><tr><th>ROLE / COMPANY</th><th>LOCATION</th><th>APPLIED / ACTIVITY</th><th>STATUS</th><th>NEXT ACTION</th><th><span class="sr-only">Edit application</span></th></tr></thead><tbody id="jobs"></tbody></table></div>
+      <div id="empty" hidden>No applications match this view. Try another search or filter.</div>
+      <footer class="ledger-footer"><span>Employer site means submission is unconfirmed.</span><span id="footer-count"></span></footer>
+    </section>
+    <p class="footnote">An advertisement closing does not change an application’s outcome. Track those separately.</p>
+  </main>
+  <dialog id="editor">
+    <form id="edit-form">
+      <div class="dialog-heading"><div><span class="eyebrow">APPLICATION DETAILS</span><h2 id="editor-title">Edit application</h2></div><button id="close-editor" type="button" class="icon-button" aria-label="Close details">×</button></div>
+      <div class="form-grid">
+        <label class="full">Role<input name="title" required maxlength="1500"></label><label>Company<input name="company" required maxlength="1500"></label><label>Location<input name="location"></label>
+        <label>Application stage<select name="stage"></select></label><label>Applied / activity date<input name="date" type="date"></label>
+        <label>Review status<select name="reviewStatus"></select></label><label>Advertisement<select name="advertStatus"></select></label>
+        <label>Salary as listed<input name="salary"></label><label>Contact<input name="contact"></label>
+        <label>Next action<input name="nextAction" placeholder="e.g. Prepare for interview"></label><label>Follow-up date<input name="followUpDate" type="date"></label>
+        <label class="full">Job link<input name="url" type="url" placeholder="https://…"></label>
+        <label class="full">Notes / evidence<textarea name="note" rows="5" maxlength="12000" placeholder="Replies, interview details, outcome evidence…"></textarea></label>
+        <label class="toggle full"><input name="strongInterest" type="checkbox"> Strong interest in this role</label>
+      </div>
+      <div id="source-info" class="source-info"></div><section id="history-section"><h3>Update history</h3><ul id="history"></ul></section>
+      <p id="form-error" class="error" role="alert"></p>
+      <div class="dialog-footer"><a id="job-link" target="_blank" rel="noreferrer" hidden>Open job link ↗</a><button type="button" id="cancel">Cancel</button><button type="submit" id="save" class="primary">Save application</button></div>
+    </form>
+  </dialog>
+</div></body>
+</html>

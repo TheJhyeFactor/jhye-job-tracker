@@ -1,0 +1,7 @@
+node_modules/
+.vercel/
+.env*
+private/
+verification/
+.agents/
+skills-lock.json

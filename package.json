@@ -1,0 +1,29 @@
+{
+  "name": "github-job-tracker",
+  "version": "1.0.0",
+  "description": "GitHub Pages frontend and authenticated private job tracker API",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/dev.mjs",
+    "audit": "npm audit --omit=dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "otplib": "13.5.0",
+    "pg": "8.23.1",
+    "qrcode": "1.5.4"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "private": true
+}
