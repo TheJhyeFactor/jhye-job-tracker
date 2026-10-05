@@ -46,5 +46,6 @@
   ],
   "buildCommand": "",
   "installCommand": "npm ci --omit=dev",
-  "framework": null
+  "framework": null,
+  "outputDirectory": "api-public"
 }
